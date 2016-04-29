@@ -71,8 +71,8 @@ class Analyze extends Command
 
     protected function configure()
     {
-        $defaultConfig = __DIR__ . '/../../phpda.yml.dist';
-
+        $defaultConfig = getcwd() . '/phpda.yml.dist';
+echo $defaultConfig;
         $this->addArgument('config', InputArgument::OPTIONAL, Message::ARGUMENT_CONFIG, $defaultConfig);
         $this->addOption('mode', 'm', InputOption::VALUE_OPTIONAL, Message::OPTION_MODE);
         $this->addOption('source', 's', InputOption::VALUE_OPTIONAL, Message::OPTION_SOURCE);
@@ -130,7 +130,7 @@ class Analyze extends Command
      */
     private function createConfigBy(InputInterface $input)
     {
-        $this->configFilePath = realpath($input->getArgument('config'));
+        $this->configFilePath = realpath($input->getArgument('config'));var_dump($this->configFilePath);
         $config = $this->configParser->parse(file_get_contents($this->configFilePath));
 
         if (!is_array($config)) {
